@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>MODULO 6: Ejercicio obligatorio 1</title>
+
+      <!-- META -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- STYLES CSS -->
+      <link href="css/bootstrap.css" rel="stylesheet">
+      <style type="text/css">
+        .unitarias {
+            background-color: #66AA66;
+            width: 400px;
+            padding: 10px;
+            clear: both;
+            margin-bottom: 10px;
+        }
+        .binarias {
+            background-color: #6666AA;
+            width: 400px;
+            padding: 10px;
+            clear: both;
+            margin-bottom: 10px;
+        }
+        .operandos {
+          background-color: #AA6666;
+          width: 400px;
+          padding: 10px;
+          clear: both;
+          margin-bottom: 10px;
+        }
+        .resultado {
+            width: 380px;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .brand {
+          cursor: default;
+        }
+        .footer {
+          position: fixed;
+          bottom: 0px;
+          left: 15px;
+          right: 15px;
+          background-color: #000;
+          color: #ccc;
+        }
+        a {
+          outline: none;
+        }
+      </style>
+
+      <!-- JAVASCRIPT -->
+      <script src="js/jquery-1.11.2.min.js"></script>
+      <script src="js/jquery-ui.min.js"></script>
+      <script src="js/jquery.ui.touch-punch.min.js"></script>
+      <script src="js/bootstrap.js"></script>
+      <script type="text/javascript">
+        $(function() {
+            // reset numeric field
+            $("#num").on("click", function() {
+              var num = $("#num");
+              num.val("");
+            });
+
+            // unaries operations
+            $("#cuadrado").on("click", function() {
+              var num = $("#num");
+              num.val(num.val() * num.val());
+            });
+            $("#inverso").on("click", function() {
+              var num = $("#num");
+              num.val(1 / num.val());
+            });
+            $("#raiz").on("click", function() {
+              var num = $("#num");
+              num.val(Math.sqrt(num.val()));
+            });
+            $("#entera").on("click", function() {
+              var num = $("#num");
+              if (num.val() >= 0) {
+                num.val(Math.floor(num.val()));
+              } else {
+                num.val(-Math.ceil(num.val()));
+              }
+            });
+
+            // summation and product
+            $("#sumatorio").on("click", function() {
+              var num = $("#num");
+              var sum = +0;
+              num.val().split(",").forEach( function(x) {
+                sum += x;
+              });
+              num.val(+sum);
+            });
+            $("#productorio").on("click", function() {
+              var num = $("#num");
+              var prod = 1;
+              num.val().split(",").forEach( function(x) {
+                prod *= x;
+              });
+              num.val(+prod);
+            });
+
+            // operations
+            $("#mas").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+              acc.val(num.val());
+              op.val("+");
+            });
+            $("#menos").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+              acc.val(num.val());
+              op.val("-");
+            });
+            $("#producto").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+              acc.val(num.val());
+              op.val("*");
+            });
+            $("#division").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+              acc.val(num.val());
+              op.val("/");
+            });
+            $("#potencia").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+              acc.val(num.val());
+              op.val("^");
+            });
+
+            // perform operation using accumulator and value in text field
+            $("#calcular").on("click", function() {
+              var num = $("#num");
+              var acc = $("#acc");
+              var op = $("#op");
+
+              if (op.val() === "+") { num.val(+acc.val() + +num.val()) }
+              if (op.val() === "-") { num.val(+acc.val() - +num.val()) }
+              if (op.val() === "*") { num.val(+acc.val() * +num.val()) }
+              if (op.val() === "/") { num.val(+acc.val() / +num.val()) }
+              if (op.val() === "^") { num.val(Math.pow(+acc.val(), +num.val())) }
+            });
+
+            // memory
+            $("#ToM").on("click", function() {
+              var num = $("#num");
+              var memory = $("#memory");
+
+              memory.val(num.val());
+            });
+            $("#FromM").on("click", function() {
+              var num = $("#num");
+              var memory = $("#memory");
+
+              num.val(memory.val());
+            });
+
+            // draggable
+            $(function() {
+              $(".draggable").draggable({ stack: "input" });
+            });
+          });
+      </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- MENU -->
+      <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand brand">Jugomo's soft</span>
+          </div>
+          <div class="collapse navbar-collapse" id="miMenu">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">INICIO</a></li>
+              <li><a href="ejercicio_puzzle.html">PUZZLE</a></li>
+              <li class="active"><a href="ejercicio_calculadora.html">CALCULADORA</a></li>
+              <li><a href="#">FRASES</a></li>
+              <li><a href="#">TEMPORIZADOR</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- CONTENIDO -->
+      <div class="calculadora">
+        <p>Buenos días, bienvenido a la calculadora de Julio González.</p>
+        <p>Número:
+          <input type="text" size="15" id="num" class="draggable" />
+          <input type="hidden" value="0" id="acc" />
+          <input type="hidden" id="op" />
+          <button id="ToM">To memory ↓</button>
+          <button id="FromM">From memory ↑</button>
+        </p>
+        <p>
+          Memoria:
+          <input type="text" id="memory" size="15" disabled class="draggable" />
+        </p>
+
+        <br/>
+        <br/>
+
+        <div class="unitarias">
+          <p>Operaciones unitarias</p>
+          <button id="cuadrado">Cuadrado x^2</button>
+          <button id="inverso">Inverso 1/x</button>
+          <button id="raiz">Raiz sqrt(x)</button>
+          <button id="entera">Parte entera [x]</button>
+        </div>
+
+        <div class="operandos">
+          <p>Operaciones con 'n' operandos introducidos en formato CSV</p>
+          <button id="sumatorio">sumatorio(x) Σ</button>
+          <button id="productorio">producto(x) π</button>
+        </div>
+
+        <div class="binarias">
+          <p>Operaciones binarias</p>
+          <button id="mas">Suma +</button>
+          <button id="menos">Resta -</button>
+          <button id="producto">Producto *</button>
+          <button id="division">Division /</button>
+          <button id="potencia">Potencia ^</button>
+
+          <button class="resultado" id="calcular">=</button>
+        </div>
+      </div>
+      <div class="panel-footer footer">Julio González</div>
+    </div>
+  </body>
+</html>

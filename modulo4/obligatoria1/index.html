@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MODULO 4: Ejercicio obligatorio 1</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      .unitarias {
+          background-color: #66AA66;
+          width: 400px;
+          padding: 10px;
+          clear: both;
+          margin-bottom: 10px;
+      }
+      .binarias {
+          background-color: #6666AA;
+          width: 400px;
+          padding: 10px;
+          clear: both;
+          margin-bottom: 10px;
+      }
+      .resultado {
+          width: 400px;
+          font-size: 20px;
+          margin-top: 10px;
+      }
+    </style>
+    <script type="text/javascript">
+      var num, acc = 0, op = "";
+
+      function cuadrado() {
+        num.value = (num.value * num.value)
+      }
+      function inverso() {
+        num.value = (1 / num.value)
+      }
+      function raiz() {
+        num.value = (Math.sqrt(num.value))
+      }
+      function entera() {
+        if (num.value >= 0) {
+          num.value = Math.floor(num.value);
+        } else {
+          num.value = -Math.ceil(num.value);
+        }
+      }
+
+      function mas()      { acc = num.value; op = "+"; }
+      function menos()    { acc = num.value; op = "-"; }
+      function producto() { acc = num.value; op = "*"; }
+      function division() { acc = num.value; op = "/"; }
+      function potencia() { acc = num.value; op = "^"; }
+
+      function calcular() {
+        if (op === "+") {num.value = (+acc + +num.value)}
+        if (op === "-") {num.value = (+acc - +num.value)}
+        if (op === "*") {num.value = (+acc * +num.value)}
+        if (op === "/") {num.value = (+acc / +num.value)}
+        if (op === "^") {num.value = (+acc ^ +num.value)}
+      }
+
+      function inic ()   {num = document.getElementById("num");}
+      function vaciar () {num.value = "";}
+    </script>
+</head>
+
+<body onLoad="inic()">
+  <p>Buenos días, bienvenido a la calculadora de Julio González.</p>
+  <p>Número:</p>
+  <input type="text" size="12" id="num" onClick="vaciar()"><p>
+
+  <div class="unitarias">
+    <p>Operaciones unitarias</p>
+    <button onClick="cuadrado()">Cuadrado x^2</button>
+    <button onClick="inverso()">Inverso 1/x</button>
+    <button onClick="raiz()">Raiz sqrt(x)</button>
+    <button onClick="entera()">Parte entera [x]</button>
+  </div>
+
+  <div class="binarias">
+    <p>Operaciones binarias</p>
+    <button onClick="mas()">Suma +</button>
+    <button onClick="menos()">Resta -</button>
+    <button onClick="producto()">Producto *</button>
+    <button onClick="division()">Division /</button>
+    <button onClick="potencia()">Potencia ^</button>
+
+    <button class="resultado" onClick="calcular()">=</button>
+  </div>
+
+</body>
+</html>

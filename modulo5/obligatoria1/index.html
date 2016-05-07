@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MODULO 5: Ejercicio obligatorio 1</title>
+    <meta charset="utf-8">
+    <script type="text/javascript"
+      src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style type="text/css">
+      .unitarias {
+          background-color: #66AA66;
+          width: 400px;
+          padding: 10px;
+          clear: both;
+          margin-bottom: 10px;
+      }
+      .binarias {
+          background-color: #6666AA;
+          width: 400px;
+          padding: 10px;
+          clear: both;
+          margin-bottom: 10px;
+      }
+      .operandos {
+        background-color: #AA6666;
+        width: 400px;
+        padding: 10px;
+        clear: both;
+        margin-bottom: 10px;
+      }
+      .resultado {
+          width: 400px;
+          font-size: 20px;
+          margin-top: 10px;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function() {
+          // reset numeric field
+          $("#num").on("click", function() {
+            var num = $("#num");
+            num.val("");
+          });
+
+          // unaries operations
+          $("#cuadrado").on("click", function() {
+            var num = $("#num");
+            num.val(num.val() * num.val());
+          });
+          $("#inverso").on("click", function() {
+            var num = $("#num");
+            num.val(1 / num.val());
+          });
+          $("#raiz").on("click", function() {
+            var num = $("#num");
+            num.val(Math.sqrt(num.val()));
+          });
+          $("#entera").on("click", function() {
+            var num = $("#num");
+            if (num.val() >= 0) {
+              num.val(Math.floor(num.val()));
+            } else {
+              num.val(-Math.ceil(num.val()));
+            }
+          });
+
+          // summation and product
+          $("#sumatorio").on("click", function() {
+            var num = $("#num");
+            var sum = +0;
+            num.val().split(",").forEach( function(x) {
+              sum += x;
+            });
+            num.val(+sum);
+          });
+          $("#productorio").on("click", function() {
+            var num = $("#num");
+            var prod = 1;
+            num.val().split(",").forEach( function(x) {
+              prod *= x;
+            });
+            num.val(+prod);
+          });
+
+          // operations
+          $("#mas").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+            acc.val(num.val());
+            op.val("+");
+          });
+          $("#menos").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+            acc.val(num.val());
+            op.val("-");
+          });
+          $("#producto").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+            acc.val(num.val());
+            op.val("*");
+          });
+          $("#division").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+            acc.val(num.val());
+            op.val("/");
+          });
+          $("#potencia").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+            acc.val(num.val());
+            op.val("^");
+          });
+
+          // perform operation using accumulator and value in text field
+          $("#calcular").on("click", function() {
+            var num = $("#num");
+            var acc = $("#acc");
+            var op = $("#op");
+
+            if (op.val() === "+") { num.val(+acc.val() + +num.val()) }
+            if (op.val() === "-") { num.val(+acc.val() - +num.val()) }
+            if (op.val() === "*") { num.val(+acc.val() * +num.val()) }
+            if (op.val() === "/") { num.val(+acc.val() / +num.val()) }
+            if (op.val() === "^") { num.val(Math.pow(+acc.val(), +num.val())) }
+          });
+        });
+    </script>
+</head>
+
+<body>
+  <p>Buenos días, bienvenido a la calculadora de Julio González.</p>
+  <p>Número:
+  <input type="text" size="60" id="num" />
+  <input type="hidden" value="0" id="acc" />
+  <input type="hidden" id="op" />
+  </p>
+
+  <br/>
+  <br/>
+
+  <div class="unitarias">
+    <p>Operaciones unitarias</p>
+    <button id="cuadrado">Cuadrado x^2</button>
+    <button id="inverso">Inverso 1/x</button>
+    <button id="raiz">Raiz sqrt(x)</button>
+    <button id="entera">Parte entera [x]</button>
+  </div>
+
+  <div class="operandos">
+    <p>Operaciones con 'n' operandos introducidos en formato CSV</p>
+    <button id="sumatorio">sumatorio(x) Σ</button>
+    <button id="productorio">producto(x) π</button>
+  </div>
+
+  <div class="binarias">
+    <p>Operaciones binarias</p>
+    <button id="mas">Suma +</button>
+    <button id="menos">Resta -</button>
+    <button id="producto">Producto *</button>
+    <button id="division">Division /</button>
+    <button id="potencia">Potencia ^</button>
+
+    <button class="resultado" id="calcular">=</button>
+  </div>
+
+</body>
+</html>

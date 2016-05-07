@@ -1,0 +1,40 @@
+<!DOCTYPE html><html>
+<head>
+  <title>MODULO 3: Ejercicio obligatorio 1</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1 id="h1"></h1>
+  <span>Julio González</span>
+  <h2 id="h2">La fecha y la hora son:</h2>
+  <div id="fecha"></div>
+  <div id="contents"></div>
+
+  <script type="text/javascript">
+    var fecha = new Date();
+    var msj;
+
+    if      (fecha.getHours() < 7)  { msj = "Buenas noches";}
+    else if (fecha.getHours() < 12) { msj = "Buenos días";}
+    else if (fecha.getHours() < 21) { msj = "Buenas tardes";}
+    else                            { msj = "Buenas noches";}
+
+    document.getElementById("h1").innerHTML    = msj;
+    document.getElementById("fecha").innerHTML = fecha;
+
+    var linea1 = "Contenido de innerHTML de elemento identificado por 'id=h2': <strong>"
+                  + document.getElementById("h2").innerHTML + "</strong>"
+    var linea2 = "Contenido de outerHTML de elemento identificado por 'id=h1': <strong>"
+                  + document.getElementById("h1").innerHTML + "</strong>"
+    var linea3 = "Contenido de de la propiedad global 'location.href': <strong>"
+                  + window.location.href + "</strong>"
+    var linea4 = "Contenido de de la propiedad global 'location': <strong>"
+                  + window.location + "</strong>"
+    var linea5 = "Contenido de de las propiedades globales 'screen.width': <strong>" + screen.width + "</strong>"
+                  + " y 'screen.heigth': <strong>" + screen.height + "</strong>"
+
+    document.getElementById("contents").innerHTML = "<br/>" + linea1 + "<br/>" + linea2 + "<br/>" +
+                                    linea3 + "<br/>" + linea4 + "<br/>" + linea5 + "<br/>"
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>MODULO 2: Opcional 1</title>
+  <style type="text/css">
+    /* contiene un id y dos marcas html */
+    /* Puntuación: 0,1,0,2 */
+    #caja header h1 { color: blue; }
+
+    /* contiene un id, una clase y una marca html */
+    /* Puntuación: 0,1,1,1 */
+    #caja .cabecera h1 { color: red; } /* máxima prioridad, gana este */
+
+    /* contiene dos marcas html */
+    /* Puntuación: 0,0,0,2 */
+    header h1 { color: lime; }
+
+    /* contiene una marca html */
+    /* Puntuación: 0,0,0,1 */
+    h1 { color: purple; }
+
+    /* contiene una marca html. Cuando tienen el mismo valor se toma la últma */
+    /* Puntuación: 0,0,0,1 */
+    h1 { color: grey; }
+  </style>
+</head>
+
+<body>
+  <div id="caja">
+    <header class="cabecera">
+      <h1>Cabecera: header</h1>
+    </header>
+  </div>
+</body>
+
+</html>

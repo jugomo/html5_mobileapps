@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>MODULO 2: Opcional 3</title>
+  <style type="text/css">
+    .bold {
+      font-weight: bold;
+    }
+    .vectorial {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p><span class="bold">Mostrar una imagen con responsive.</span> Para ayudar a
+    visualizar las diferentes dimensiones, por favor, coloque su navegador en
+    modo ventana (no maximizado) y a continuación vaya cambiando el ancho de
+    la ventana.</p>
+
+  <picture>
+    <source media="(min-width: 1100px)" srcset="six.jpg">
+    <source media="(min-width: 1000px)" srcset="five.jpg">
+    <source media="(min-width: 800px)" srcset="four.png">
+    <source media="(min-width: 600px)" srcset="three.jpg">
+    <source media="(min-width: 400px)" srcset="two.jpg">
+    <source media="(min-width: 300px)" srcset="one.jpg">
+    <img src="one.jpg" alt="shaum">
+  </picture>
+
+  <hr/>
+
+  <p><span class="bold">Mostrar un video de youtube.</span> Gracias a los
+    sistemas de auto conversión de formato de video (en función del navegador
+    detectado) que posee Youtube, hace posible que cualquier vídeo que se sube
+    una única vez por un usuario con un solo formato, pueda ser visualizado
+    en todos los navegadores.</p>
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/kUHhEp61oE4"
+          frameborder="0" allowfullscreen> </iframe>
+
+  <hr/>
+
+  <p><span class="bold">Mostrar una imagen vectorial SVG.</span> La imagen vectorial
+  tiene la particularidad de que no pierde calidad si es redimensionada de su
+  resolución original.</p>
+
+  <object class="vectorial" type="image/svg+xml" data="vectorial.svg"></object>
+
+</body>
+</html>

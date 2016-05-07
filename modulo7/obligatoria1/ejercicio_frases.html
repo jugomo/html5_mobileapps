@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MODULO 7: Ejercicio obligatorio 1</title>
+
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- STYLES CSS -->
+    <link rel="stylesheet" type="text/css" href="css/citas_slide.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <style type="text/css">
+      .brand {
+        cursor: default;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0px;
+        left: 15px;
+        right: 15px;
+        background-color: #000;
+        color: #ccc;
+      }
+      a {
+        outline: none;
+      }
+    </style>
+
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
+    <script type="text/javascript" src="js/galeria.js" ></script>
+    <script>
+        var t, actual;
+
+        // cargar el elemento i de la galeria y comienza el carrusel
+        function select(i) {
+            actual = i;
+            $(".citas1 a")
+              .removeClass("on off")
+              .addClass(function(j){return(j===i)?"on":"off";});
+            $("#persona").html(galeria[i].persona);
+            $("#frase").html(galeria[i].frase);
+            $("#foto").attr("src", galeria[i].foto);
+            clearTimeout(t);
+            t = setTimeout( function(){select((i + 1) % galeria.length);}, 2000);
+        }
+
+        // regenera la botonera
+        function generar_selector() {
+            var selector = $("#selector");
+            selector.html("");
+            galeria.forEach(function(elem,i) {
+              selector.append("<li><a onClick='select("+i+")'></a></li>");
+            });
+        }
+
+        // jquery on_document_load
+        $(function() {
+            generar_selector();
+
+            // handler para el boton editar
+            $("#editar").on("click", function(){
+              var pnl = $("#datos");
+              if(pnl.css("display") == "none") {
+                // mostrar edicion
+                clearTimeout(t);
+                $("#persona_d").html(galeria[actual].persona);
+                $("#frase_d").html(galeria[actual].frase);
+                $("#foto_d").html(galeria[actual].foto);
+                pnl.css("display", "block");
+              } else {
+                // ocultar edicion
+                t = setTimeout( function(){select((0) % galeria.length);}, 2000);
+                pnl.css("display", "none");
+              }
+            })
+
+            // handler para el boton crear nuevo
+            $("#nuevo").on("click", function(){
+              $("#datos").css("display", "none");
+
+              actual = galeria.push({
+                 persona:$("#persona_d").html(),
+                 frase:$("#frase_d").html(),
+                 foto:$("#foto_d").html()
+              }) - 1;
+              generar_selector();
+              select(actual);
+            })
+
+            // handler para el boton salvar cambios
+            $("#guardar").on("click", function() {
+              var editado = {
+                persona:$("#persona_d").html(),
+                frase:$("#frase_d").html(),
+                foto:$("#foto_d").html()
+              };
+              galeria.splice(actual,1,editado);
+              select(actual);
+              $("#editar").click();
+            })
+
+            // handler para el boton eliminar seleccionado
+            $("#borrar").on("click", function() {
+              galeria.splice(actual,1);
+              generar_selector();
+              select(actual);
+              $("#editar").click();
+            })
+
+            // seleccionar el primer elemento de la galería
+            select(0);
+        });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- MENU -->
+      <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand brand">Jugomo's soft</span>
+          </div>
+          <div class="collapse navbar-collapse" id="miMenu">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">INICIO</a></li>
+              <li><a href="ejercicio_puzzle.html">PUZZLE</a></li>
+              <li><a href="ejercicio_calculadora.html">CALCULADORA</a></li>
+              <li class="active"><a href="ejercicio_frases.html">FRASES</a></li>
+              <li><a href="#">TEMPORIZADOR</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- CONTENIDO -->
+      <div class="contenido">
+        <nav class="citas1">
+          <ul id="selector"></ul>
+        </nav>
+        <section id="caja">
+          <img id="foto" alt="" />
+          <div class="textos">
+            <p id="frase"></p>
+            <p id="persona"></p>
+          </div>
+        </section>
+        <div class="editar" id="editar">
+          <img src="images/carat-d-white.svg" alt="" title="editar"/>
+        </div>
+        <section id="datos">
+          <div contentEditable="true" id="persona_d"></div>
+          <div contentEditable="true" id="frase_d"></div>
+          <div contentEditable="true" id="foto_d"></div>
+          <div id="botones">
+            <ul>
+              <li><img src="images/edit-black.svg" alt="" title="guardar" id="guardar"/></li>
+              <li><img src="images/plus-black.svg" alt="" title="nuevo" id="nuevo"/></li>
+              <li><img src="images/delete-black.svg" alt="" title="borrar" id="borrar"/></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="panel-footer footer">Julio González</div>
+    </div>
+  </body>
+</html>
